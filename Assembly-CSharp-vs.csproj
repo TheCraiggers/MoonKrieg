@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AntiAir.cs" />
+     <Compile Include="Assets\Scripts\AntiAirCloneBehavior.cs" />
      <Compile Include="Assets\Scripts\AntiAirMissileBehavior.cs" />
      <Compile Include="Assets\Scripts\Balloon.cs" />
      <Compile Include="Assets\Scripts\Bomb.cs" />

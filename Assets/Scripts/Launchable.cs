@@ -8,6 +8,7 @@ public class Launchable : MonoBehaviour {
 	public float SightRadius;
 	public bool Disabled;
 	public bool Landed;
+	public Vector3 MyOffset;
 	
 	// Use this for initialization
 	void Start () {
