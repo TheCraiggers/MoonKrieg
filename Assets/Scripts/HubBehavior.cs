@@ -45,7 +45,7 @@ public class HubBehavior : MonoBehaviour {
 	}
 	
 	public void Fire() {
-		GameObject Launched = Instantiate(AntiAir,this.transform.position + new Vector3(0,1,0),this.transform.rotation) as GameObject;
+		GameObject Launched = Instantiate(Mines,this.transform.position + new Vector3(0,1,0),this.transform.rotation) as GameObject;
 		Physics.IgnoreCollision(this.gameObject.collider,Launched.collider);
 		Launched.SendMessage("SetParent",this.gameObject);
 		Launched.rigidbody.AddRelativeForce(Vector3.up * 500);

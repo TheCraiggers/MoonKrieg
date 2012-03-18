@@ -11,15 +11,15 @@ public class AntiAirMissileBehavior : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		Debug.Log("0");
 		StartCoroutine(LaunchMe());
 		TargetLaunchable = Target.GetComponent<Launchable>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log(TargetLaunchable.MyOffset);
-		//Detect if missile wraps around
+		//Has the target been destroyed by some other means?  If so, I explode.
+		if (Target == null)
+			Destroy(gameObject);
 		
 		//Have missile look at target
 		if (Seeking)
@@ -28,13 +28,11 @@ public class AntiAirMissileBehavior : MonoBehaviour {
 	
 	private IEnumerator LaunchMe()
 	{
-		Debug.Log("1");
 		this.gameObject.rigidbody.AddRelativeForce(Vector3.up * 500);
 		yield return new WaitForSeconds(0.5F);
-		Debug.Log("2");
 		Seeking = true;
 		this.gameObject.AddComponent("ConstantForce");
-		this.gameObject.constantForce.relativeForce = new Vector3(0F,0F,50F);
+		this.gameObject.constantForce.relativeForce = new Vector3(0F,0F,20F);
 	}
 	
 	void OnCollisionEnter(Collision col)

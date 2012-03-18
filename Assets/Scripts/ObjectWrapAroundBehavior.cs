@@ -4,10 +4,14 @@ using System.Collections;
 public class ObjectWrapAroundBehavior : MonoBehaviour {
 
 	private Terrain MainTerrain;
+	private TetherDropper MyTetherDropper;
+	private Launchable MyLaunchable;
 	
 	// Use this for initialization
 	void Start () {
 		MainTerrain = GameObject.Find("Main Camera").GetComponent<CameraMove>().MainTerrain;
+		MyLaunchable = gameObject.GetComponent<Launchable>();
+		MyTetherDropper = gameObject.GetComponent<TetherDropper>();
 	}
 	
 	// Update is called once per frame
@@ -15,23 +19,27 @@ public class ObjectWrapAroundBehavior : MonoBehaviour {
 		//wrap to other end of world
 		if (transform.position.x < 0){ 
 			transform.position += new Vector3(MainTerrain.terrainData.size.x,0,0);
-			gameObject.GetComponent<TetherDropper>().ParentOffset += new Vector3(MainTerrain.terrainData.size.x,0,0);
+			if (MyTetherDropper != null)
+				MyTetherDropper.ParentOffset += new Vector3(MainTerrain.terrainData.size.x,0,0);
 			gameObject.GetComponent<Launchable>().MyOffset += new Vector3(MainTerrain.terrainData.size.x,0,0);
 		}
 		if (transform.position.x > MainTerrain.terrainData.size.x) {
 			transform.position -= new Vector3(MainTerrain.terrainData.size.x,0,0);
-			gameObject.GetComponent<TetherDropper>().ParentOffset += new Vector3(-MainTerrain.terrainData.size.x,0,0);
+			if (MyTetherDropper != null)
+				MyTetherDropper.ParentOffset += new Vector3(-MainTerrain.terrainData.size.x,0,0);
 			gameObject.GetComponent<Launchable>().MyOffset += new Vector3(-MainTerrain.terrainData.size.x,0,0);
 		}
 		
 		if (transform.position.z < 0) {
 			transform.position += new Vector3(0,0,MainTerrain.terrainData.size.z);
-			gameObject.GetComponent<TetherDropper>().ParentOffset += new Vector3(0,0,MainTerrain.terrainData.size.z);
+			if (MyTetherDropper != null)
+				MyTetherDropper.ParentOffset += new Vector3(0,0,MainTerrain.terrainData.size.z);
 			gameObject.GetComponent<Launchable>().MyOffset += new Vector3(0,0,MainTerrain.terrainData.size.z);
 		}
 		if (transform.position.z > MainTerrain.terrainData.size.z) {
 			transform.position -= new Vector3(0,0,MainTerrain.terrainData.size.z);
-			gameObject.GetComponent<TetherDropper>().ParentOffset += new Vector3(0,0,-MainTerrain.terrainData.size.z);
+			if (MyTetherDropper != null)
+				MyTetherDropper.ParentOffset += new Vector3(0,0,-MainTerrain.terrainData.size.z);
 			gameObject.GetComponent<Launchable>().MyOffset += new Vector3(0,0,-MainTerrain.terrainData.size.z);
 		}
 	}

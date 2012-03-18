@@ -52,12 +52,15 @@
      <Compile Include="Assets\Scripts\Bridge.cs" />
      <Compile Include="Assets\Scripts\Building.cs" />
      <Compile Include="Assets\Scripts\CameraMove.cs" />
+     <Compile Include="Assets\Scripts\CloneBehavior.cs" />
      <Compile Include="Assets\Scripts\CloneManager.cs" />
      <Compile Include="Assets\Scripts\ClusterBomb.cs" />
      <Compile Include="Assets\Scripts\Collector.cs" />
      <Compile Include="Assets\Scripts\Crawler.cs" />
+     <Compile Include="Assets\Scripts\DetectApex.cs" />
      <Compile Include="Assets\Scripts\DupeTerrain.cs" />
      <Compile Include="Assets\Scripts\EMP.cs" />
+     <Compile Include="Assets\Scripts\Explode.cs" />
      <Compile Include="Assets\Scripts\FamilyBehavior.cs" />
      <Compile Include="Assets\Scripts\GUIControl.cs" />
      <Compile Include="Assets\Scripts\HubBehavior.cs" />

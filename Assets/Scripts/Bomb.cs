@@ -3,13 +3,6 @@ using System.Collections;
 
 public class Bomb : MonoBehaviour {
 	
-	public int BlastRadius;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
 	
@@ -18,12 +11,11 @@ public class Bomb : MonoBehaviour {
 	void OnCollisionEnter(Collision col)
 	{
 		//TODO: Add explosion graphic / sound.
-		col.gameObject.SendMessage("ReceiveDamage",6);
-		Collider[] objectsInRange = Physics.OverlapSphere(this.gameObject.transform.localPosition, BlastRadius);
-		foreach (Collider Hit in objectsInRange)
-		{
-			Hit.gameObject.SendMessage("ReceiveDamage",3);
-		}
+		//Assign damage to whatever we hit.
+		if (col.gameObject != null)
+			col.gameObject.SendMessage("ApplyDamage",this.gameObject.GetComponent<Explode>().DirectHitDamage);
+		this.gameObject.SendMessage("BlowUp");
+
 		//Destroy myself
 		Destroy(this.gameObject);
 	}

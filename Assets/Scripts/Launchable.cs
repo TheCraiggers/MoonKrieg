@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Launchable : MonoBehaviour {
 	
-	public int DirectHitDamage;
-	public int SplashHitDamage;
 	public float SightRadius;
 	public bool Disabled;
 	public bool Landed;
@@ -37,6 +35,30 @@ public class Launchable : MonoBehaviour {
 	{
 			
 	}
+	
+	void OnCollisionEnter(Collision col) {
+        if (col.gameObject.tag == "Ground")
+		{
+			//TODO: Detect if the object landed on flat terrain or hit a cliff
+			Debug.Log("Start Hit...");
+			foreach (ContactPoint contact in col.contacts) {
+				Debug.Log(contact.normal);
+			}
+			Debug.Log("END Hit...");
+			
+			//object hit ground, freeze it in place & notify scripts
+			this.rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+			this.gameObject.SendMessage("HasLanded");
+		}
+		if (col.gameObject.tag == "Water")
+		{
+			//Object hit water.  If it hits this, object is (usually) destroyed.
+			Debug.Log("Hit Water!");
+			//TODO: Added water sound / gfx effect
+			this.gameObject.SendMessage("HasHitWater");
+		}
+        
+    }
 	
 	public void HasLanded()
 	{
